@@ -13,6 +13,12 @@ export const accountCommandDAO = {
     console.log("BDD après modification:", ACCOUNT_LIST);
   },
   retrieveAccount(id) {
-    return ACCOUNT_LIST.find((account) => account.id === id);
+    const account = ACCOUNT_LIST.find((acc) => acc.id === id);
+    return new Account(
+      account.id,
+      account.lastName,
+      account.firstName,
+      account.creationDate
+    );
   },
 };
