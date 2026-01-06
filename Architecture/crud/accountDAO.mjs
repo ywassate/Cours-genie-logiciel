@@ -19,6 +19,14 @@ export const accountDAO = {
     console.log("BDD après modification:", ACCOUNT_LIST);
   },
   retrieveAccount(id) {
-    return ACCOUNT_LIST.find((account) => account.id === id);
+    const account = ACCOUNT_LIST.find((account) => account.id === id);
+    if (account) {
+      const { lastName, firstName, ...rest } = account;
+      return {
+        ...rest,
+        name: `${firstName} ${lastName}`,
+      };
+    }
+    return null;
   },
 };
