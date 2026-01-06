@@ -6,12 +6,19 @@ export const accountDAO = {
     console.log("BDD:", ACCOUNT_LIST);
   },
   retrieveAccountList() {
-    return ACCOUNT_LIST.map((account) => ({
-      id: account.id,
-      lastName: account.lastName,
-      firstName: account.firstName,
-    }));
+    return ACCOUNT_LIST.map((account) => {
+      const { creationDate, ...accountWithoutCreationDate } = account;
+      return accountWithoutCreationDate;
+    });
   },
-  updateAccount(account) {},
-  retrieveAccount(id) {},
+  updateAccount(account) {
+    const index = ACCOUNT_LIST.findIndex((acc) => acc.id === account.id);
+    if (index !== -1) {
+      ACCOUNT_LIST[index] = account;
+    }
+    console.log("BDD après modification:", ACCOUNT_LIST);
+  },
+  retrieveAccount(id) {
+    return ACCOUNT_LIST.find((account) => account.id === id);
+  },
 };
